@@ -4,11 +4,14 @@ This repo contains materials for the Infrastructure as Code - Building Azure inf
 
 Planned Locations:
 
-* 
+* TBD
 
-##
+## Presentation
+
+Preliminary content can be viewed here: [https://gitpitch.com/CardinalNow/TerraformWorkshop](https://gitpitch.com/CardinalNow/TerraformWorkshop)
+
+## Resources
 
 - https://www.terraform.io/docs/providers/azurerm
-
 - http://aka.ms/tfhub Microsoft documentation
 - https://github.com/kamatama41/tfenv Terraform Version Switcher
