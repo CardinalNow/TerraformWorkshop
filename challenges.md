@@ -4,13 +4,14 @@ Below is a series of "challenges" or guided exercises to help attendees learn ab
 
 ## Environment Setup
 
-For the Workship event, attendees will be provided a Terraform Entrprise account. [ ] TODO: Fill in details about TFE.
+For the Workship event, attendees will be provided a 30-day trial of Terraform Entrprise.
 
 __Prerequisites to bring to the event__
 
 - Laptop
 - Azure account with access to deploy at least 10 cores and at least contributor access
 - [Azure Service Principal](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?toc=%2Fazure%2Fazure-resource-manager%2Ftoc.json&view=azure-cli-latest#create-a-service-principal-for-your-application) Needed for Terraform Enterprise Challenges
+- Github Account (Free)
 
 __Setup__
 
@@ -47,3 +48,21 @@ If you get stuck, refer to the `solutions` directory for a working solution to t
 ### Challeng 09: [Private Module Registry](challenges/09-privatemoduleregistry/README.md)
 
 ### Challeng 10: [Sentinel Policy](challenges/10-value/README.md)
+
+## TFE Repo Layout
+
+Fork all 4 repos from tstraub-terraformworkshop.
+
+### azureworkshop-workspaces
+
+`app-dev` folder is basic workspace - no modules to get them up and running on TFE
+
+`app-dev-modules` references the modules in the folders below (step 2)
+
+### terraform-azurerm-webserver
+
+### terraform-azurerm-appserver
+
+### terraform-azurerm-dataserver
+
+
