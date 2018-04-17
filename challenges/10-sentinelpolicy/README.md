@@ -9,20 +9,90 @@ Using the TFE app and the API.
 
 ### View Polcies
 
-https://app.terraform.io/app/cardinalsolutions/settings/policies
+In the Terraform Enterprise web app, click on your organization -> Organization Settings
+
+https://app.terraform.io/app/YOUR_TFE_ORGANIZATION/settings/policies
+
+![](../../img/2018-04-16-20-02-58.png)
 
 ### Create Policy in App
 
-https://app.terraform.io/app/cardinalsolutions/settings/policies
+Click "Create new Policy"
+
+![](../../img/2018-04-16-20-03-30.png)
 
 ### Create Policy from API
 
-Show how to connect from an API.
+Create the following policy:
+
+__Policy Name:__ ResourceGroupRequireTag
+
+__Policy Enforcement:__ advisory (logging only)
+
+__Policy Code:__
+
+```hcl
+import "tfplan"
+
+main = rule {
+  all tfplan.resources.azurerm_resource_group as _, instances {
+    all instances as _, r {
+      (length(r.tags) else 0) >= 0
+    }
+  }
+}
+```
+
+### Run a Plan
+
+Queue a plan for the workspace `app-dev`.
+
+### Review the Plan
+
+Will see the plan was sucessful but there was a policy failure, however the option to Apply is still available.
+
+### Update the Policy
+
+Update the Policy Enforcement to be `hard-mandatory`.
+
+### Run a Plan
+
+Queue a plan for the workspace `app-dev`.
+
+### Review the Plan
+
+This time the the run fails due to the hard enforcement.
+
+### Update Workspace
+
+In the `app-dev` workspace, add the following to the `azurerm_resource_group` declaration:
+
+```hcl
+resource "azurerm_resource_group" "module" {
+
+...
+
+  tags {
+    Owner = "me"
+  }
+}
+```
+
+Save and commit the code to your reposistory.
+
+### Run a Plan
+
+Run another plan.
+
+> Note: You may need to discard the last non-applied build.
+
+### Review the Plan
+
+The plan should succedd and now pass the sentinel policy check.
 
 ## Advanced areas to explore
 
-1. Go
-1. Here
+1. Write another Sentinel Policy restricting VM types in Azure.
 
 ## Resources
 
