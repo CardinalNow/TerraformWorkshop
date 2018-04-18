@@ -34,10 +34,27 @@ __Policy Code:__
 ```hcl
 import "tfplan"
 
+required_tags = [
+  "owner",
+  "environment",
+]
+
+getTags = func(group) {
+  tags = keys(group.applied.tags)
+
+  for required_tags as t {
+    if t not in tags {
+      print("Resource Missing Tag:", t)
+      return false
+    }
+  }
+
+  return true
+}
 main = rule {
-  all tfplan.resources.azurerm_resource_group as _, instances {
-    all instances as _, r {
-      (length(r.tags) else 0) >= 0
+  all tfplan.resources.azurerm_resource_group as _, groups {
+    all groups as _, group {
+      getTags(group)
     }
   }
 }
@@ -97,3 +114,4 @@ The plan should succedd and now pass the sentinel policy check.
 ## Resources
 
 - [Policy](https://app.terraform.io/app/cardinalsolutions/settings/policies)
+- [Sentinel Language Spec](https://docs.hashicorp.com/sentinel/language/spec)
