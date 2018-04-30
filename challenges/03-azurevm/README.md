@@ -177,10 +177,6 @@ Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 </p>
 </details>
 
-
-
-
-
 ### Add more Terraform Configuration
 
 Now that we have networking in place, we will add the Virtual Machine and it's NIC.

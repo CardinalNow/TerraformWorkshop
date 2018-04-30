@@ -1,24 +1,24 @@
 # INVITE: Infrastructure as Code - Building Azure infrastructure using Terraform and Terraform Enterprise
 
 Infrastructure as Code allows the management of your infrastructure including networks, virtual machines, platform services, and load balancers. Utilizing Terraform configuration to describe the desired Azure resources needed for an environment ensures that consistent infrastructure is created each time it is deployed.
- 
+
 This Workshop is focused on:
 
 - Understanding Infrastructure as Code concepts
-- Terraform as an Infrastruture as Code provider
+- Terraform as an Infrastructure as Code provider
 - Terraform Enterprise features and benefits
 
 ### Understanding Infrastructure as Code concepts
 
 Infrastructure as Code allows DevOps teams to deploy production-like environments early in the development cycle. Declarative code representing infrastructure can also be validated and approved before moving downstream. Using Azure's cloud platform, dynamic creation, modification, and deletion of infrastructure that is built rapidly, reliably, and at scale.
 
-### Terraform as an Infrastruture as Code provider
+### Terraform as an Infrastructure as Code provider
 
-Utilizing a simple configuration language Terraform allows for a human readable representation of your infrastructure. The execution plan phase allows infrastrcuture to be viewed and approved with full confidence that you are changing your environment how you intended.
+Utilizing a simple configuration language Terraform allows for a human readable representation of your infrastructure. The execution plan phase allows infrastructure to be viewed and approved with full confidence that you are changing your environment how you intended.
 
 ### Terraform Enterprise features and benefits
 
-Terraform Enterprise offers a single location to perform all of your Terraform workflows. It is a central place to manage your infrastructure and includes collabration, governance, and private module registry capabilities.
+Terraform Enterprise offers a single location to perform all of your Terraform workflows. It is a central place to manage your infrastructure and includes collaboration, governance, and private module registry capabilities.
 
 ## Target Audience
 
@@ -28,7 +28,7 @@ The event is targeted at DevOps teams and managers looking to automate infrastru
 
 ### Gets
 
-- Learn alongside Cardinal and Microsoft Enginners to help you understand the design considerations to accelerate your Azure infrastructure deployments.
+- Learn alongside Cardinal and Microsoft Engineers to help you understand the design considerations to accelerate your Azure infrastructure deployments.
 - Engage in hands on coding to help understand the options available to designing your IaC solution.
 - Post-Hackfest engagements to ensure your continued success.
 

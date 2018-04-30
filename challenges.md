@@ -21,7 +21,6 @@ __Setup__
     - [VSCode Terraform Extension](https://github.com/mauve/vscode-terraform)
 - [git](https://git-scm.com/downloads)
 - Clone this repo `git clone https://github.com/straubt1/TerraformWorkshop.git`
-- (optional) Docker?
 
 ## Challenges
 
