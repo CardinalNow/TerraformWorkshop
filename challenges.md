@@ -20,7 +20,7 @@ __Setup__
 - [Visual Studio Code](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) (or your favorite text editor)
     - [VSCode Terraform Extension](https://github.com/mauve/vscode-terraform)
 - [git](https://git-scm.com/downloads)
-- Clone this repo `git clone https://github.com/straubt1/TerraformWorkshop.git`
+- Clone this repo `git clone https://github.com/CardinalNow/TerraformWorkshop.git`
 
 ## Challenges
 
@@ -47,21 +47,3 @@ If you get stuck, refer to the `solutions` directory for a working solution to t
 ### Challeng 09: [Private Module Registry](challenges/09-privatemoduleregistry/README.md)
 
 ### Challeng 10: [Sentinel Policy](challenges/10-value/README.md)
-
-## TFE Repo Layout
-
-Fork all 4 repos from tstraub-terraformworkshop.
-
-### azureworkshop-workspaces
-
-`app-dev` folder is basic workspace - no modules to get them up and running on TFE
-
-`app-dev-modules` references the modules in the folders below (step 2)
-
-### terraform-azurerm-webserver
-
-### terraform-azurerm-appserver
-
-### terraform-azurerm-dataserver
-
-

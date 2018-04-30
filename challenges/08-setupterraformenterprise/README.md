@@ -4,6 +4,21 @@
 
 In this challenge, you will connect to your Terraform Enterprise.
 
+## TFE Repo Layout
+
+Fork all 4 repos from https://github.com/tstraub-terraformworkshop.
+
+### azureworkshop-workspaces
+
+`app-dev` folder is basic workspace - no modules to get them up and running on TFE
+
+`app-dev-modules` references the modules in the folders below (step 2)
+
+### terraform-azurerm-webserver
+
+### terraform-azurerm-appserver
+
+### terraform-azurerm-dataserver
 
 ## How to
 
