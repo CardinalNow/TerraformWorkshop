@@ -92,6 +92,10 @@ This will create a simple Resource Group and allow you to walk through the Terra
 
 ### Run the Terraform Workflow
 
+`terraform init`
+<details><summary>View Output</summary>
+<p>
+
 ```sh
 $ terraform init
 
@@ -107,6 +111,15 @@ If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 ```
+
+</p>
+</details>
+
+---
+`terraform plan`
+
+<details><summary>View Output</summary>
+<p>
 
 ```sh
 $ terraform plan
@@ -138,6 +151,14 @@ Note: You didn't specify an "-out" parameter to save this plan, so Terraform
 can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 ```
+
+</p>
+</details>
+
+---
+`terraform apply`
+<details><summary>View Output</summary>
+<p>
 
 ```sh
 $ terraform apply
@@ -171,6 +192,10 @@ azurerm_resource_group.main: Creation complete after 1s (ID: /subscriptions/.../
 
 Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ```
+</p>
+</details>
+
+---
 
 Congrats, you just created your first Azure resource using Terraform!
 
@@ -251,6 +276,7 @@ Destroy complete! Resources: 3 destroyed.
 ## Advanced areas to explore
 
 1. Play around with adjusting the `count` and `name` parameters, then running `apply`.
+1. Add tags to each resource.
 
 ## Resources
 
