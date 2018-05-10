@@ -2,33 +2,52 @@
 
 ## Expected Outcome
 
-In this challenge, you will sync your modules to TFE for consumption.
+In this challenge you will register some modules with your Private Module Registry then reference them in a workspace.
 
 ## How to
 
 ### Fork the Module Repositories
 
-Fork the following repo's into your own github account:
+Just like in the last challenge, you are going to fork the following repo's into your own github account:
 
-- https://github.com/tstraub-terraformworkshop/terraform-azurerm-networking.git
-- https://github.com/tstraub-terraformworkshop/terraform-azurerm-webserver.git
-- https://github.com/tstraub-terraformworkshop/terraform-azurerm-appserver.git
-- https://github.com/tstraub-terraformworkshop/terraform-azurerm-dataserver.git
+- https://github.com/azure-terraform-workshop/terraform-azurerm-networking.git
+- https://github.com/azure-terraform-workshop/terraform-azurerm-webserver.git
+- https://github.com/azure-terraform-workshop/terraform-azurerm-appserver.git
+- https://github.com/azure-terraform-workshop/terraform-azurerm-dataserver.git
+
+Each of these repositories represents a module that can be developed and versioned independently.
 
 ### Add Modules
 
-Click the "+ Modules" button.
+Navigate back to Terraform Enterprise and click the "Modules" menu at the top of the page. From there click the "+ Modules" button.
+
+![](../../img/2018-05-10-17-37-05.png)
+
+You are now ready to add you modules.
 
 ![](../../img/2018-04-15-13-09-55.png)
 
 Enter the name of the source repository you forked in the previous step. For example: 'YOUR_GITHUB_USERNAME/terraform-azurerm-networking`.
 
-Click "Publish Module". 
+Click "Publish Module".
+
 This will query the repository for necessary files and tags used for versioning.
+
+Congrats, you are done!
+
+Ok, not really...
+
+Repeat this step for the other three modules:
+
+- terraform-azurerm-appserver
+- terraform-azurerm-dataserver
+- terraform-azurerm-webserver
 
 ### Consume Modules
 
 Create a new workspace just like in the previous Challenge, except this time select the working directory of "app-dev-module" that will reference your the modules you just added.
+
+![](../../img/2018-05-10-17-40-35.png)
 
 ### Configure Variables
 
@@ -103,20 +122,14 @@ Login to the at Azure Portal to see your infrastructure.
 
 ### Update a Module
 
-Make a change to the appserver module.
+In the `azureworkshop-workspaces` repository, navigate to the `app-dev-modules/main.tf` file and update one (or several) of the modules versions from "0.0.1" to "0.0.2".
 
-Check in the changet to github.
-
-Add a new version tag: `git tag v0.0.1`
-
-Push the tag to the remote: `git push origin --tags`
-
-View the new module version in Terraform Enterprise.
+Commit your change and see what the changes show in the plan. What was the difference between version 0.0.1 and 0.0.2? Does this look like a safe change to make?
 
 ## Advanced areas to explore
 
-1. Add another module.
-1. Add another workspace.
+1. Add another workspace using a different combination of the 3-tier application.
+1. Make a change to one of the modules and commit that to the repository. How do you get a new version to show in your Private Module Registry?
 
 ## Resources
 

@@ -3,11 +3,11 @@
 ## Expected Outcome
 
 In this challenge, you will see how you can apply policies around your Azure subscriptions using Sentinel Policies.
-Using the TFE app and the API.
+
 
 ## How to
 
-### View Polcies
+### View Policies
 
 In the Terraform Enterprise web app, click on your organization -> Organization Settings
 
@@ -66,7 +66,7 @@ Queue a plan for the workspace `app-dev`.
 
 ### Review the Plan
 
-Will see the plan was sucessful but there was a policy failure, however the option to Apply is still available.
+Will see the plan was successful but there was a policy failure, however the option to Apply is still available.
 
 ### Update the Policy
 
@@ -95,7 +95,7 @@ resource "azurerm_resource_group" "module" {
 }
 ```
 
-Save and commit the code to your reposistory.
+Save and commit the code to your repository.
 
 ### Run a Plan
 
@@ -105,7 +105,7 @@ Run another plan.
 
 ### Review the Plan
 
-The plan should succedd and now pass the sentinel policy check.
+The plan should succeed and now pass the sentinel policy check.
 
 ## Advanced areas to explore
 

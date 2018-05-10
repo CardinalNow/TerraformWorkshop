@@ -15,13 +15,13 @@ In order to organize your code, create the following folder structure with `main
 │   └── dev
 │       └── main.tf
 └── modules
-    └── linux_virtual_machine
+    └── my_virtual_machine
         └── main.tf
 ```
 
 ### Create the Module
 
-Inside the `linux_virtual_machine` module folder copy over the terraform configuration from challenge 04.
+Inside the `my_virtual_machine` module folder copy over the terraform configuration from challenge 04.
 
 ### Create Variables
 
@@ -42,11 +42,15 @@ variable "password" {}
 
 Change your working directory to the `environments/dev` folder.
 
-Update main.tf to declare your module, it should look similar to this:
+Update main.tf to declare your module, it could look similar to this:
 
 ```hcl
-module "myawesomelinuxvm" {
-    source = "../../modules/linux_virtual_machine"
+variable "username" {}
+variable "password" {}
+
+module "myawesomewindowsvm" {
+  source = "../../modules/my_virtual_machine"
+  name   = "awesomeapp"
 }
 ```
 
@@ -58,13 +62,13 @@ Run `terraform init`.
 
 ```sh
 Initializing modules...
-- module.myawesomelinuxvm
-  Getting source "../../modules/linux_virtual_machine"
+- module.myawesomewindowsvm
+  Getting source "../../modules/my_virtual_machine"
 
-Error: module "myawesomelinuxvm": missing required argument "name"
-Error: module "myawesomelinuxvm": missing required argument "vm_size"
-Error: module "myawesomelinuxvm": missing required argument "username"
-Error: module "myawesomelinuxvm": missing required argument "password"
+Error: module "myawesomewindowsvm": missing required argument "name"
+Error: module "myawesomewindowsvm": missing required argument "vm_size"
+Error: module "myawesomewindowsvm": missing required argument "username"
+Error: module "myawesomewindowsvm": missing required argument "password"
 ```
 
 We have a problem! We didn't set required variables for our module.
@@ -72,12 +76,12 @@ We have a problem! We didn't set required variables for our module.
 Update the `main.tf` file:
 
 ```hcl
-module "myawesomelinuxvm" {
-  source   = "../../modules/linux_virtual_machine"
-  name     = "mysuperapp"
+module "myawesomewindowsvm" {
+  source = "../../modules/my_virtual_machine"
+  name   = "awesomeapp"
   vm_size  = "Standard_A2_v2"
-  username = "testadmin"
-  password = "Password1234!"
+  username = "${var.username}"
+  password = "${var.password}"
 }
 ```
 
@@ -88,10 +92,10 @@ Run `terraform init` again, this time there should not be any errors.
 Run `terraform plan` and you should see your linux VM built from your module.
 
 ```sh
-  + module.myawesomelinuxvm.azurerm_resource_group.module
+  + module.myawesomewindowsvm.azurerm_resource_group.module
       id:                                 <computed>
       location:                           "centralus"
-      name:                               "mysuperapp-rg"
+      name:                               "awesomeapp-rg"
 
 ...
 
@@ -100,15 +104,15 @@ Plan: 6 to add, 0 to change, 0 to destroy.
 
 ## Add Another Module
 
-Add another `module` block descrbing another set of VM's.
+Add another `module` block describing another set of Virtual Machines:
 
 ```hcl
-module "differentlinuxvm" {
-  source   = "../../modules/linux_virtual_machine"
-  name     = "differentapp"
+module "differentwindowsvm" {
+  source = "../../modules/my_virtual_machine"
+  name   = "differentapp"
   vm_size  = "Standard_A2_v2"
-  username = "testadmin"
-  password = "Password1234!"
+  username = "${var.username}"
+  password = "${var.password}"
 }
 ```
 
@@ -131,10 +135,10 @@ Since we added another module call, we must run `terraform init` again before ru
 We should see twice as much infrastructure in our plan.
 
 ```sh
-  + module.myawesomelinuxvm.azurerm_resource_group.module
+  + module.myawesomewindowsvm.azurerm_resource_group.module
       id:                                 <computed>
       location:                           "centralus"
-      name:                               "mysuperapp-rg"
+      name:                               "awesomeapp-rg"
 
 ...
 
@@ -169,9 +173,10 @@ Run `terraform plan` and verify that your plan succeeds and looks the same.
 ## Advanced areas to explore
 
 1. Use environment variables to load your secrets.
+1. Add a reference to the Public Terraform Module for [Azure Compute](https://registry.terraform.io/modules/Azure/compute/azurerm)
 
 ## Resources
 
-- []()
-- []()
-- []()
+- [Using Terraform Modules](https://www.terraform.io/docs/modules/usage.html)
+- [Source Terraform Modiules](https://www.terraform.io/docs/modules/sources.html)
+- [Public Module Registry](https://www.terraform.io/docs/registry/index.html)

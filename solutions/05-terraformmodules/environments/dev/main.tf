@@ -1,18 +1,18 @@
 variable "username" {}
 variable "password" {}
 
-module "myawesomelinuxvm" {
-  source   = "../../modules/linux_virtual_machine"
-  name     = "mysuperapp"
+module "myawesomewindowsvm" {
+  source = "../../modules/my_virtual_machine"
+  name   = "awesomeapp"
   vm_size  = "Standard_A2_v2"
   username = "${var.username}"
   password = "${var.password}"
-  vmcount  = 2
+  vmcount = 2
 }
 
-module "differentlinuxvm" {
-  source   = "../../modules/linux_virtual_machine"
-  name     = "differentapp"
+module "differentwindowsvm" {
+  source = "../../modules/my_virtual_machine"
+  name   = "differentapp"
   vm_size  = "Standard_A2_v2"
   username = "${var.username}"
   password = "${var.password}"

@@ -198,7 +198,7 @@ Run a `terraform destroy` when you are done exploring.
 ## Advanced areas to explore
 
 1. What do you think will happen if you try to combine the Azure Container Instances above (Linux and Windows) into one?
-1. Replicate the Terraform above using a single Azure ClI command. Which is easier?
+1. Replicate the Terraform above using a single Azure CLI command. Which is easier?
 
 ## Resources
 
