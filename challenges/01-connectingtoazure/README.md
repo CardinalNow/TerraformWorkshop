@@ -10,7 +10,9 @@ In this challenge, you will:
 - run an `apply` to create Azure infrastructure
 - run a `destroy` to remove Azure infrastructure
 
-## How to
+> Note: While most of these commands should be relatively universal, you might encounter some issues running them from a Windows cmd shell.  If this happens to you, try running the commands from the Git bash or PowerShell.
+
+## How To:
 
 ### Create Service Principal
 
@@ -51,7 +53,7 @@ Retrying role assignment creation: 4/36
 
 Take note of all 4 of these values and keep them safe, you will need to access them throughout the workshop.
 
-> NOTE: It is a good idea to remove this Service Principal after the workshop!
+> NOTE: It is a good idea to remove this Service Principal after the workshop!  Using the ID of the service principal, you can run an `az ad sp delete --id <ID>`.  See [here](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest) for more details.
 
 ### Set Azure Credentials
 
