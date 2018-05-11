@@ -87,7 +87,9 @@ Set working directory and branch properly!
 
 ### Configure Variables
 
-Set a the Terraform Variable "name" to something unique. Example "app-dev".
+Now that you have a workspace, navigate to the variables.
+
+Set a the Terraform Variable "name" to something unique. Example "app-dev". Click "Save".
 
 Set Environment Variables for your Azure Service Principal (be sure check the 'sensitive' checkbox to hide these values):
 
@@ -95,6 +97,8 @@ Set Environment Variables for your Azure Service Principal (be sure check the 's
 - ARM_SUBSCRIPTION_ID
 - ARM_CLIENT_ID
 - ARM_CLIENT_SECRET
+
+Click "Save".
 
 ![](../../img/2018-04-14-14-10-32.png)
 
@@ -119,8 +123,9 @@ Enter a comment and then Apply.
 
 ## Advanced areas to explore
 
+1. Explore state versions after the apply.
 1. Add another folder in the repository for 'app-prod' and create another workspace with different settings.
-2. Push a change to the repository with the workspaces in it, what happens in Terraform Enterprise?
+1. Push a change to the repository with the workspaces in it, what happens in Terraform Enterprise?
 
 ## Resources
 

@@ -9,7 +9,7 @@ Below is a series of "challenges" or guided exercises to help attendees learn ab
 - Github Account (Free)
 - Terraform Enterprise Account. Attendees will be provided a 30-day trial.
 
-Setting up your laptop for the challenges is done in Challenge 00.
+Setting up your laptop for the challenges is done in Challenge 00 - Getting Started.
 
 ## Challenges
 
