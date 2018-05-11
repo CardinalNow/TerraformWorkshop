@@ -62,11 +62,17 @@ Pick a name that indicates the intent of the infrastructure. Example: 'app-dev'
 
 ### Setup VCS
 
-You won't have any "Source" options, so click the "+" button to connect Terraform Enterprise to your source control.
+<!-- ![](../../img/2018-04-14-13-21-32.png) -->
 
-![](../../img/2018-04-14-13-21-32.png)
+You won't have any "Source" options, so click the "+" button to connect Terraform Enterprise to your source control.  You will be see the following screen asking you to add a VCS root.  Click the "Add VCS Provider" button to continue:
 
-Follow the instructions for any of the following VSC providers (we are going to be using Github):
+![](../../img/2018-05-11-11-22-22.png)
+
+You will be brought to the Add VCS Provider page:
+
+![](../../img/2018-05-11-11-26-22.png)
+
+Follow the instructions for any of the following VCS providers (we are going to be using Github):
 
 - [Github](https://www.terraform.io/docs/enterprise/vcs/github.html)
 - [Github Enterprise](https://www.terraform.io/docs/enterprise/vcs/github-enterprise.html)
@@ -76,6 +82,10 @@ Follow the instructions for any of the following VSC providers (we are going to 
 - [Bitbucket Server](https://www.terraform.io/docs/enterprise-legacy/index.html)
 
 > Note: This only has to be done once for each Version Control Provider.
+
+> Note: You will need to update your placeholder URL to successfully connect/create your GitHub VCS root.  Make sure you grab your authorization callback URL from GitHub as defined in Step 3 of the instructions for GitHub above.  You may not see the menus described in Step 2.
+
+After this is done, you may have to go back and create your workspace if you didn't do so before you created the VCS provider.  You can do so by navigating to the Workspaces tab at the top of the page and clicking the "New Workspace" button, choosing your GitHub VCS provider during creation.
 
 ### Connect Workspace
 
@@ -98,6 +108,8 @@ Set Environment Variables for your Azure Service Principal (be sure check the 's
 - ARM_CLIENT_ID
 - ARM_CLIENT_SECRET
 
+> Note: You used commands to get/set this information in Step 1 [here.](../01-connectingtoazure/README.md)  Refer back to it if you need to refresh your memory.
+
 Click "Save".
 
 ![](../../img/2018-04-14-14-10-32.png)
@@ -113,7 +125,7 @@ Click the "Queue Plan" button.
 
 ### Run an Apply
 
-Enter a comment and then Apply.
+Enter a comment and then apply by clicking "Confirm & Apply".
 
 ![](../../img/2018-04-14-14-13-52.png)
 
