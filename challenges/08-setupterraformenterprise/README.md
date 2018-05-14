@@ -64,7 +64,7 @@ Pick a name that indicates the intent of the infrastructure. Example: 'app-dev'
 
 <!-- ![](../../img/2018-04-14-13-21-32.png) -->
 
-You won't have any "Source" options, so click the "+" button to connect Terraform Enterprise to your source control.  You will be see the following screen asking you to add a VCS root.  Click the "Add VCS Provider" button to continue:
+You won't have any "Source" options, so click the "+" button to connect Terraform Enterprise to your source control.  You will see the following screen asking you to add a VCS root.  Click the "Add VCS Provider" button to continue:
 
 ![](../../img/2018-05-11-11-22-22.png)
 
@@ -109,6 +109,8 @@ Set Environment Variables for your Azure Service Principal (be sure check the 's
 - ARM_CLIENT_SECRET
 
 > Note: You used commands to get/set this information in Step 1 [here.](../01-connectingtoazure/README.md)  Refer back to it if you need to refresh your memory.
+
+> Note: Remember also that some aliases/commands don't work as expected from a Windows cmd shell; if you have any issues with the commands you can try to run them either in the Git bash or PowerShell.
 
 Click "Save".
 

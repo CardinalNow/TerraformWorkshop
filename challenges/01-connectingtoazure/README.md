@@ -10,7 +10,9 @@ In this challenge, you will:
 - run an `apply` to create Azure infrastructure
 - run a `destroy` to remove Azure infrastructure
 
-## How to
+> Note: While most of these commands should be relatively universal, you might encounter some issues running them from a Windows cmd shell.  If this happens to you, try running the commands from the Git bash or PowerShell.
+
+## How To:
 
 ### Create Service Principal
 
@@ -28,6 +30,12 @@ To make things easy here is a one line command to get the job done:
 ```sh
 az ad sp create-for-rbac -n TerraformAzureWorkshop --role="Contributor" --scopes /subscriptions/$(az account show -o tsv --query id)
 ```
+
+> Note: As mentioned above, this command might not work in the cmd shell in Windows.  If you can't use PowerShell or the Git bash, you should be able to separate this into multiple commands to get around cmd shell limitations, first getting your account ID and using that in the second query, like so:
+>
+> ```az account show -o tsv --query id```  //returns account ID, use below
+>
+> ```az ad sp create-for-rbac -n TerraformAzureWorkshop --role="Contributor" --scopes /subscriptions/<ID from above query>```
 
 You may see output stating "Retrying", this is normal and is just the CLI waiting for the role to be created.
 
@@ -51,7 +59,7 @@ Retrying role assignment creation: 4/36
 
 Take note of all 4 of these values and keep them safe, you will need to access them throughout the workshop.
 
-> NOTE: It is a good idea to remove this Service Principal after the workshop!
+> NOTE: It is a good idea to remove this Service Principal after the workshop!  Using the ID of the service principal, you can run an `az ad sp delete --id <ID>`.  See [here](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest) for more details.
 
 ### Set Azure Credentials
 
