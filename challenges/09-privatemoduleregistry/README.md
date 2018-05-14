@@ -4,11 +4,11 @@
 
 In this challenge you will register some modules with your Private Module Registry then reference them in a workspace.
 
-## How to
+## How to:
 
 ### Fork the Module Repositories
 
-Just like in the last challenge, you are going to fork the following repo's into your own github account:
+Just like in the last challenge, you are going to fork the following repos into your own GitHub account:
 
 - https://github.com/azure-terraform-workshop/terraform-azurerm-networking.git
 - https://github.com/azure-terraform-workshop/terraform-azurerm-webserver.git
@@ -19,11 +19,11 @@ Each of these repositories represents a module that can be developed and version
 
 ### Add Modules
 
-Navigate back to Terraform Enterprise and click the "Modules" menu at the top of the page. From there click the "+ Modules" button.
+Navigate back to Terraform Enterprise and click the "Modules" menu at the top of the page. From there click the "+ Add Module" button.
 
 ![](../../img/2018-05-10-17-37-05.png)
 
-You are now ready to add you modules.
+You are now ready to add your modules.
 
 ![](../../img/2018-04-15-13-09-55.png)
 
@@ -45,13 +45,13 @@ Repeat this step for the other three modules:
 
 ### Consume Modules
 
-Create a new workspace just like in the previous Challenge, except this time select the working directory of "app-dev-module" that will reference your the modules you just added.
+Create a new workspace just like in the previous Challenge, except this time enter the working directory of "app-dev-modules" that will reference your the modules you just added.
 
 ![](../../img/2018-05-10-17-40-35.png)
 
 ### Configure Variables
 
-Set a the Terraform Variables:
+Set the Terraform Variables:
 
 - 'name' - A unique environment name such as `devmodules`
 - 'location' - An Azure region such as `eastus` or `centralus`
@@ -61,7 +61,7 @@ Set a the Terraform Variables:
     ```hcl
     ["10.0.0.0/16"]
     ```
-- 'subnet_address_prefixes' (HCL ) - The Subnet Address spaces representing 3 subnets
+- 'subnet_address_prefixes' (HCL) - The Subnet Address spaces representing 3 subnets
     ```hcl
     [
     "10.0.0.0/24",
@@ -70,7 +70,7 @@ Set a the Terraform Variables:
     ]
     ```
 
-Set Environment Variables for your Azure Service Prinipal (be sure check the 'sensative' checkbox to hide these values):
+Set Environment Variables for your Azure Service Principal (be sure check the 'sensitive' checkbox to hide these values):
 
 - ARM_TENANT_ID
 - ARM_SUBSCRIPTION_ID
@@ -87,9 +87,9 @@ Wait for the Plan to complete.
 
 ### Fix the Errors
 
-The `app-dev-modules/main.tf` file references the wrong modules source. Update all the modules sources to match your Terraform Enterprise Organization.
+The `/app-dev-modules/main.tf` file references the wrong modules source. Update all the modules sources (in your forked `azureworkshop-workspaces` GitHub repo) to match your Terraform Enterprise Organization.
 
-For example.
+For example:
 
 Change this:
 
