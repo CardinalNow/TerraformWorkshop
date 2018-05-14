@@ -33,11 +33,3 @@ Run `terraform init`.
 ### View Lock State
 
 Run a plan and view the file in the portal, notice how a lease is put on it.
-
-## Advanced areas to explore
-
-1. Go
-
-## Resources
-
-- []()

@@ -12,7 +12,7 @@ In this challenge, you will:
 
 > Note: While most of these commands should be relatively universal, you might encounter some issues running them from a Windows cmd shell.  If this happens to you, try running the commands from the Git bash or PowerShell.
 
-## How To:
+## How To
 
 ### Create Service Principal
 
@@ -33,9 +33,9 @@ az ad sp create-for-rbac -n TerraformAzureWorkshop --role="Contributor" --scopes
 
 > Note: As mentioned above, this command might not work in the cmd shell in Windows.  If you can't use PowerShell or the Git bash, you should be able to separate this into multiple commands to get around cmd shell limitations, first getting your account ID and using that in the second query, like so:
 >
-> ```az account show -o tsv --query id```  //returns account ID, use below
+> `az account show -o tsv --query id`
 >
-> ```az ad sp create-for-rbac -n TerraformAzureWorkshop --role="Contributor" --scopes /subscriptions/<ID from above query>```
+> `az ad sp create-for-rbac -n TerraformAzureWorkshop --role="Contributor" --scopes /subscriptions/<ID from above query>`
 
 You may see output stating "Retrying", this is normal and is just the CLI waiting for the role to be created.
 

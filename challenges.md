@@ -29,7 +29,7 @@ If you get stuck, refer to the `solutions` directory for a working solution to t
 
 ### Challenge 05: [Terraform Modules](challenges/05-terraformmodules/README.md)
 
-### Challenge 06: [Advanced Terraform Modules](challenges/06-advancedmodules/README.md)
+### Challenge 06: [Public Module Registry](challenges/06-publicmoduleregistry/README.md)
 
 ### Challenge 07: [Remote Backend](challenges/07-remotebackend/README.md)
 
