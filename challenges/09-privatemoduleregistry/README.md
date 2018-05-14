@@ -56,7 +56,13 @@ Set the Terraform Variables:
 - 'name' - A unique environment name such as `devmodules`
 - 'location' - An Azure region such as `eastus` or `centralus`
 - 'username' (sensitive) - A username for the VM's
+> Note: this can not be "admin"
 - 'password' (sensitive) - A password for the VM's
+> NOTE: password must be between 6-72 characters long and must satisfy at least 3 of password complexity requirements from the following:
+> 1. Contains an uppercase character
+> 2. Contains a lowercase character
+> 3. Contains a numeric digit
+> 4. Contains a special character
 - 'vnet_address_spacing' (HCL) - The Vnet Address space
     ```hcl
     ["10.0.0.0/16"]
