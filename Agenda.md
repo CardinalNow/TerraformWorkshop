@@ -1,7 +1,5 @@
 # Agenda
 
-TBD
-
 | Time | Topic |
 | ---- | ----- |
 | 8:30-9:15   | Getting Started & Overview                           |

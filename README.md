@@ -9,6 +9,12 @@ Workshop Locations:
 - Tuesday June 5th, 2018 [Columbus, OH](https://www.eventbrite.com/e/provision-and-manage-microsoft-azure-infrastructure-tickets-45781193783)
 - Monday June 11th, 2018 [New York City, NY](https://www.eventbrite.com/e/provision-and-manage-microsoft-azure-infrastructure-tickets-46152026955)
 
+## Surveys
+
+[Pre-Session](https://goo.gl/forms/R1va12J0ZEUplv2D3)
+
+[Post-Session](https://goo.gl/forms/kwuitMzjo9vJZKHz1)
+
 ## Presentation
 
 The Power Point presentation can be found here: [AzureTerraformWorkshopPresentation](docs/AzureTerraformWorkshopPresentation.pptx)
