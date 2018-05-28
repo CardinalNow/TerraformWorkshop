@@ -8,6 +8,66 @@ This challenge will require that you have a github account so that you can fork 
 
 ## How to
 
+### Create Service Principal
+
+Create a Service Principal on your Azure Subscription that Terraform will use to authenticate.
+To do this we need to get the following:
+
+- Tenant ID
+- Subscription ID
+- Client ID
+- Client Secret
+
+The tenant and subscription info are static, but we need to generate that service principal to get the Client ID and Secret.
+To make things easy here is a one line command to get the job done:
+
+```sh
+az ad sp create-for-rbac -n TerraformAzureWorkshop --role="Contributor" --scopes /subscriptions/$(az account show -o tsv --query id)
+```
+
+> Note: As mentioned above, this command might not work in the cmd shell in Windows.  If you can't use PowerShell or the Git bash, you should be able to separate this into multiple commands to get around cmd shell limitations, first getting your account ID and using that in the second query, like so:
+>
+> `az account show -o tsv --query id`
+>
+> `az ad sp create-for-rbac -n TerraformAzureWorkshop --role="Contributor" --scopes /subscriptions/<ID from above query>`
+
+You may see output stating "Retrying", this is normal and is just the CLI waiting for the role to be created.
+
+When everything is complete you should see something like this:
+
+```sh
+Retrying role assignment creation: 1/36
+Retrying role assignment creation: 2/36
+Retrying role assignment creation: 3/36
+Retrying role assignment creation: 4/36
+{
+  "appId": "THIS IS YOUR CLIENT ID",
+  "displayName": "TerraformAzureWorkshop",
+  "name": "http://TerraformAzureWorkshop",
+  "password": "THIS IS YOUR CLIENT PASSWORD",
+  "tenant": "THIS IS YOUR TENANT ID"
+}
+```
+
+> The subscription id can be seen in the Azure Portal, or by running the Azure CLI command `az account show`
+
+Take note of all 4 of these values and keep them safe, you will need to access them throughout the workshop.
+
+> NOTE: It is a good idea to remove this Service Principal after the workshop!  Using the ID of the service principal, you can run an `az ad sp delete --id <ID>`.  See [here](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest) for more details.
+
+### Set Azure Credentials
+
+Terraform Enterprise uses a Service Principal to authenticate Terraform for use with Azure.
+
+Keep track of the following environment variables based on the Service Principal:
+
+```sh
+export ARM_TENANT_ID=
+export ARM_SUBSCRIPTION_ID=
+export ARM_CLIENT_ID=
+export ARM_CLIENT_SECRET=
+```
+
 ### Fork the Repository
 
 Open up a browser and navigate to the pre-built repository https://github.com/azure-terraform-workshop/azureworkshop-workspaces.

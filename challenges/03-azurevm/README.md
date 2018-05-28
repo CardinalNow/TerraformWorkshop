@@ -21,7 +21,7 @@ The resources you will use in this challenge:
 
 We will start with a few of the basic resources needed.
 
-Open up a terminal and change the working directory to this challenge `cd ./challenges/03-azurevm`
+From the Cloud Shell, change directory into a folder specific to this challenge. If you created the scaffolding in Challenge 00, then then you can use the command `cd ~/clouddrive/AzureWorkChallenges/challenge03/`.
 
 Create a `main.tf` file with the following to pin the version of Terraform and the AzureRM Provider:
 

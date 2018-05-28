@@ -2,90 +2,20 @@
 
 ## Expected Outcome
 
-In this challenge, you will connect Terraform on your local machine to your Azure Subscription.
+In this challenge, you will use Terraform from the Azure Cloud Shell to create simple infrastructure in your Azure Subscription.
 
 In this challenge, you will:
-- initialize Terraform
-- run a `plan` on simple a simple resource
-- run an `apply` to create Azure infrastructure
-- run a `destroy` to remove Azure infrastructure
 
-> Note: While most of these commands should be relatively universal, you might encounter some issues running them from a Windows cmd shell.  If this happens to you, try running the commands from the Git bash or PowerShell.
+- Initialize Terraform
+- Run a `plan` on simple a simple resource
+- Run an `apply` to create Azure infrastructure
+- Run a `destroy` to remove Azure infrastructure
 
 ## How To
 
-### Create Service Principal
-
-Create a Service Principal on your Azure Subscription that Terraform will use to authenticate.
-To do this we need to get the following:
-
-- Tenant ID
-- Subscription ID
-- Client ID
-- Client Secret
-
-The tenant and subscription info are static, but we need to generate that service principal to get the Client ID and Secret.
-To make things easy here is a one line command to get the job done:
-
-```sh
-az ad sp create-for-rbac -n TerraformAzureWorkshop --role="Contributor" --scopes /subscriptions/$(az account show -o tsv --query id)
-```
-
-> Note: As mentioned above, this command might not work in the cmd shell in Windows.  If you can't use PowerShell or the Git bash, you should be able to separate this into multiple commands to get around cmd shell limitations, first getting your account ID and using that in the second query, like so:
->
-> `az account show -o tsv --query id`
->
-> `az ad sp create-for-rbac -n TerraformAzureWorkshop --role="Contributor" --scopes /subscriptions/<ID from above query>`
-
-You may see output stating "Retrying", this is normal and is just the CLI waiting for the role to be created.
-
-When everything is complete you should see something like this:
-
-```sh
-Retrying role assignment creation: 1/36
-Retrying role assignment creation: 2/36
-Retrying role assignment creation: 3/36
-Retrying role assignment creation: 4/36
-{
-  "appId": "THIS IS YOUR CLIENT ID",
-  "displayName": "TerraformAzureWorkshop",
-  "name": "http://TerraformAzureWorkshop",
-  "password": "THIS IS YOUR CLIENT PASSWORD",
-  "tenant": "THIS IS YOUR TENANT ID"
-}
-```
-
-> The subscription id can be seen in the Azure Portal, or by running the Azure CLI command `az account show`
-
-Take note of all 4 of these values and keep them safe, you will need to access them throughout the workshop.
-
-> NOTE: It is a good idea to remove this Service Principal after the workshop!  Using the ID of the service principal, you can run an `az ad sp delete --id <ID>`.  See [here](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest) for more details.
-
-### Set Azure Credentials
-
-There are several ways to authenticate Terraform for use with Azure.
-For ease of this workshop, and to mimic the Terraform Enterprise work later, we will use the Environment Variables method.
-
-Set the following environment variables based on the Service Principal:
-
-```sh
-export ARM_TENANT_ID=
-export ARM_SUBSCRIPTION_ID=
-export ARM_CLIENT_ID=
-export ARM_CLIENT_SECRET=
-```
-
-Verify that the values are set `env | grep ".*ARM.*"`
-
-```sh
-$ env | grep ".*ARM.*"
-ARM_SUBSCRIPTION_ID=<SUPER SECRET>
-ARM_CLIENT_SECRET=<SUPER SECRET>
-ARM_TENANT_ID=<SUPER SECRET>
-ARM_CLIENT_ID=<SUPER SECRET>
-```
-
 ### Create Terraform Configuration
+
+From the Cloud Shell, change directory into a folder specific to this challenge. If you created the scaffolding in Challenge 00, then then you can use the command `cd ~/clouddrive/AzureWorkChallenges/challenge01/`.
 
 Create a file named `main.tf` and add a single Resource Group resource.
 
@@ -281,9 +211,213 @@ azurerm_resource_group.count[1]: Destruction complete after 47s
 Destroy complete! Resources: 3 destroyed.
 ```
 
+---
+
+## How To - Part 2 (Import Resources)
+
+### Create Infrastructure in the Portal
+
+Navigate to the Azure Portal and click on the "Resource groups" item on the left side and then click  "+ Add":
+
+![](../../img/2018-05-28-13-58-49.png)
+
+In the Resource Group create blade give the resource group the name "myportal-rg" and click "Create":
+
+![](../../img/2018-05-28-14-01-30.png)
+
+Once the Resource Group is created, navigate to it.
+
+Find the "+ Add" button and click it:
+
+![](../../img/2018-05-28-14-03-05.png)
+
+Search for "Storage Account" and click the first item and then click "Create" :
+
+![](../../img/2018-05-28-14-04-39.png)
+
+
+In the Storage Account create blad, fill out the following:
+
+- Name = Must be a unique name, there will be a green checkmark that shows up in the text box if your name is available. Example "<YOURUSERNAME>storageaccount"
+- Replication = LRS
+- Resource Group = Use Existing and select "myportal-rg"
+
+![](../../img/2018-05-28-14-05-39.png)
+
+Click "Create"
+
+At this point we have a Resource Group and a Storage Account and are ready to import this into Terraform.
+
+![](../../img/2018-05-28-14-09-39.png)
+
+### Create Terraform Configuration
+
+Your Azure Cloud Shell should still be in the folder for this challenge with a single `main.tf` file.
+Delete the contents of that file so we can start from scratch.
+
+We have two resources we need to import into our Terraform Configuration, to do this we need to do two things:
+
+1. Create the base Terraform configuration for both resources.
+2. Run `terraform import` to bring the infrastructure into our state file.
+
+To create the base configuration place the following code into the `main.tf` file.
+
+```hcl
+resource "azurerm_resource_group" "main" {
+  name     = "myportal-rg"
+  location = "centralus"
+}
+
+resource "azurerm_storage_account" "main" {
+  name                     = "myusernamestorageaccount"
+  resource_group_name      = "${azurerm_resource_group.main.name}"
+  location                 = "centralus"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
+```
+
+`terraform plan`
+
+Shows 2 to add
+
+```sh
+Terraform will perform the following actions:
+
+  + azurerm_resource_group.main
+      id:                               <computed>
+      location:                         "centralus"
+      name:                             "myportal-rg"
+      tags.%:                           <computed>
+
+  + azurerm_storage_account.main
+      id:                               <computed>
+      access_tier:                      <computed>
+      account_encryption_source:        "Microsoft.Storage"
+      account_kind:                     "Storage"
+      account_replication_type:         "LRS"
+      account_tier:                     "Standard"
+      enable_blob_encryption:           <computed>
+      enable_file_encryption:           <computed>
+      location:                         "centralus"
+      name:                             "myusernamestorageaccount"
+      primary_access_key:               <computed>
+      primary_blob_connection_string:   <computed>
+      primary_blob_endpoint:            <computed>
+      primary_connection_string:        <computed>
+      primary_file_endpoint:            <computed>
+      primary_location:                 <computed>
+      primary_queue_endpoint:           <computed>
+      primary_table_endpoint:           <computed>
+      resource_group_name:              "myportal-rg"
+      secondary_access_key:             <computed>
+      secondary_blob_connection_string: <computed>
+      secondary_blob_endpoint:          <computed>
+      secondary_connection_string:      <computed>
+      secondary_location:               <computed>
+      secondary_queue_endpoint:         <computed>
+      secondary_table_endpoint:         <computed>
+      tags.%:                           <computed>
+
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+```
+
+> CAUTION: This is not what we want!
+
+### Import the Resource Group
+
+We need two values to run the `terraform import` command:
+
+1. Resource Address from our configuration
+1. Azure Resource ID
+
+The Resource Address is simple enough, based on the configuration above it is simply "azurerm_resource_group.main".
+
+The Azure Resource ID can be retrieved using the Azure CLI by running `az group show -g myportal-rg --query id`. The value should look something like "/subscriptions/xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myportal-rg".
+
+Now run the import command:
+
+```sh
+$ terraform import azurerm_resource_group.main /subscriptionsxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myportal-rg
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+```
+
+### Import the Storage Account
+
+The process here is the same.
+
+The Resource Address is simple enough, based on the configuration above it is simply "azurerm_storage_account.main".
+
+The Azure Resource ID can be retrieved using the Azure CLI by running `az storage account show -g myportal-rg -n myusernamestorageaccount --query id`. The value should look something like "/subscriptions/xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myportal-rg/providers/Microsoft.Storage/storageAccounts/myusernamestorageaccount".
+
+```sh
+$ terraform import azurerm_storage_account.main /subscriptions/xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myportal-rg/providers/Microsoft.Storage/storageAccounts/myusernamestorageaccount
+
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+```
+
+### Verify Plan
+
+Run a `terraform plan`, you should see "No changes. Infrastructure is up-to-date.".
+
+### Make a Change
+
+Add the following tag configuration to both the Resource Group and the Storage Account:
+
+```hcl
+resource "azurerm_resource_group" "main" {
+  ...
+  tags {
+    terraform = "true"
+  }
+}
+
+resource "azurerm_storage_account" "main" {
+  ...
+  tags {
+    terraform = "true"
+  }
+}
+```
+
+Run a plan, we should see two changes.
+
+```sh
+  ~ azurerm_resource_group.main
+      tags.%:         "0" => "1"
+      tags.terraform: "" => "true"
+
+  ~ azurerm_storage_account.main
+      tags.%:         "0" => "1"
+      tags.terraform: "" => "true"
+
+
+Plan: 0 to add, 2 to change, 0 to destroy.
+```
+
+Apply those changes.
+
+SUCCESS! You have now brought existing infrastructure into Terraform.
+
+### Cleanup
+
+Because the infrastructure is now managed by Terraform, we can destroy just like before.
+
+Run a `terraform destroy` and follow the prompts to remove the infrastructure.
+
 ## Advanced areas to explore
 
-1. Play around with adjusting the `count` and `name` parameters, then running `apply`.
+1. Play around with adjusting the `count` and `name` parameters, then running `plan` and `apply`.
+1. Run the `plan` command with the `-out` option and apply that output.
 1. Add tags to each resource.
 
 ## Resources

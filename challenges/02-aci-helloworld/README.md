@@ -17,6 +17,8 @@ There are two docker containers that will be deployed:
 
 ### Create Terraform Configuration
 
+From the Cloud Shell, change directory into a folder specific to this challenge. If you created the scaffolding in Challenge 00, then then you can use the command `cd ~/clouddrive/AzureWorkChallenges/challenge02/`.
+
 Create a new file called `main.tf` with the following contents:
 
 ```hcl
