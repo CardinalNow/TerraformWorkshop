@@ -4,7 +4,7 @@ provider "azurerm" {
 }
 
 terraform {
-  required_version = "= 0.11.7"
+  required_version = ">= 0.11.7"
 }
 
 # Variables

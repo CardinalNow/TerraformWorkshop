@@ -17,7 +17,7 @@ For each challenge, change your working directory to the folder for that challen
 Each challenge is meant to be independent of each other.
 If you get stuck, refer to the `solutions` directory for a working solution to the challenge.
 
-### Challenge 00: [Getting Started](challenges/01-gettingstarted/README.md)
+### Challenge 00: [Getting Started](challenges/00-gettingstarted/README.md)
 
 ### Challenge 01: [Connecting to Azure](challenges/01-connectingtoazure/README.md)
 
