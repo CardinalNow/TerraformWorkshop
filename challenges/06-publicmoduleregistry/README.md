@@ -98,9 +98,9 @@ We can see the outputs we should expect and a short description of each of them.
 
 ![](../../img/2018-05-14-08-18-48.png)
 
-Now that we have the networking infrastructure applied, we can view the outputs with terraform by running `terraform output -module networking`.
+Now that we have the networking infrastructure applied, we can view the outputs with terraform by running `terraform output -module network`.
 
-> Note: Because we are using a module, the outputs are not available at the root module, hence the need to specify the `-module networking` option.
+> Note: Because we are using a module, the outputs are not available at the root module, hence the need to specify the `-module network` option.
 
 ```sh
 $ terraform output -module network
