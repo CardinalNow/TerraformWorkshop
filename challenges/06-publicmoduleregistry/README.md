@@ -134,6 +134,11 @@ module "windowsservers" {
 
 Run a `terraform init` and `terraform plan` to verify that all the resources look correct.
 
+When running a plan you may run into the following error:
+![](../../img/2018-06-07-16-23-29.png)
+
+To get past this, simply run the `az login` command and follow the prompts.
+
 > Note: Take a minute to analyse why you needed to run another `terraform init` command before you could run a plan.
 
 <details><summary>View Output</summary>
