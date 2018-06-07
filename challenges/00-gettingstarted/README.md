@@ -159,20 +159,13 @@ az account set -s 'Visual Studio Premium with MSDN'
 
 ### Create Challenge Scaffolding
 
-Running an `ls` command will list all the files and directories:
+To make things easy for the challenges, let's create a folder structure to hold the terraform configuration we will create.
+
+Make sure you are in the home directory:
 
 ```sh
-$ ls
-clouddrive
+cd ~/
 ```
-
-Here we can see a folder called `clouddrive` which persists all of our files.
-
-Change directory into that folder now `cd clouddrive`.
-
-> Note: Be sure to always change into this directory or subdirectory if you happen to close your Azure Cloud Shell instance.
-
-To make things easy for the challenges, let's create a folder structure to hold the terraform configuration we will create.
 
 Run the following in the azure cloud shell, this will simply create a folder structure for you to place your Terraform configuration:
 

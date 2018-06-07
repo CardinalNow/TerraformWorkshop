@@ -10,7 +10,7 @@ Be aware that if you did not destroy the infrastructure from Challenge 03 you ma
 
 ### Copy Terraform Configuration
 
-From the Cloud Shell, change directory into a folder specific to this challenge. If you created the scaffolding in Challenge 00, then then you can use the command `cd ~/clouddrive/AzureWorkChallenges/challenge04/`.
+From the Cloud Shell, change directory into a folder specific to this challenge. If you created the scaffolding in Challenge 00, then then you can use the command `cd ~/AzureWorkChallenges/challenge04/`.
 
 Copy the `main.tf` file from challenge 03 into the current directory.
 

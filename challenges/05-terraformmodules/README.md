@@ -8,7 +8,7 @@ In this challenge, you will create a module to contain a scalable virtual machin
 
 ### Create Folder Structure
 
-From the Cloud Shell, change directory into a folder specific to this challenge. If you created the scaffolding in Challenge 00, then then you can use the command `cd ~/clouddrive/AzureWorkChallenges/challenge05/`.
+From the Cloud Shell, change directory into a folder specific to this challenge. If you created the scaffolding in Challenge 00, then then you can use the command `cd ~/AzureWorkChallenges/challenge05/`.
 
 In order to organize your code, create the following folder structure with `main.tf` files.
 

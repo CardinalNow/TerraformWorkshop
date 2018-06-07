@@ -15,7 +15,7 @@ In this challenge, you will:
 
 ### Create Terraform Configuration
 
-From the Cloud Shell, change directory into a folder specific to this challenge. If you created the scaffolding in Challenge 00, then then you can use the command `cd ~/clouddrive/AzureWorkChallenges/challenge01/`.
+From the Cloud Shell, change directory into a folder specific to this challenge. If you created the scaffolding in Challenge 00, then then you can use the command `cd ~/AzureWorkChallenges/challenge01/`.
 
 Create a file named `main.tf` and add a single Resource Group resource.
 
