@@ -1,13 +1,3 @@
-# Version pinning
-provider "azurerm" {
-  version = "= 1.4"
-}
-
-terraform {
-  required_version = ">= 0.11.7"
-}
-
-# Variables
 variable "name" {
   default = "challenge04"
 }
@@ -100,13 +90,11 @@ resource "azurerm_virtual_machine" "main" {
 
 ## Outputs
 output "private-ip" {
-  // value       = "${azurerm_network_interface.main.private_ip_address}"
   value       = "${azurerm_network_interface.main.*.private_ip_address}"
   description = "Private IP Address"
 }
 
 output "public-ip" {
-  // value       = "${azurerm_public_ip.main.ip_address}"
   value       = "${azurerm_public_ip.main.*.ip_address}"
   description = "Public IP Address"
 }
