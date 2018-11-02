@@ -7,6 +7,7 @@
 Notes.md
 
 *.tfvars
+*terraform.tfstate*
 *.terraform.tfstate.lock.info
 ~*.pptx
 __*.*
