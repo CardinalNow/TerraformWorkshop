@@ -4,10 +4,7 @@ This repository contains materials for the Infrastructure as Code - Building Azu
 
 Workshop Locations:
 
-- Wednesday May 23rd, 2018 [Chicago, IL](https://www.eventbrite.com/e/provision-and-manage-microsoft-azure-infrastructure-tickets-45562831656)
-- Thursday May 31st, 2018 [Atlanta, GA](https://www.eventbrite.com/e/provision-and-manage-microsoft-azure-infrastructure-tickets-44854601320)
-- Tuesday June 5th, 2018 [Columbus, OH](https://www.eventbrite.com/e/provision-and-manage-microsoft-azure-infrastructure-tickets-45781193783)
-- Monday June 11th, 2018 [New York City, NY](https://www.eventbrite.com/e/provision-and-manage-microsoft-azure-infrastructure-tickets-46152026955)
+- Monday November 5th, 2018 [Tampa, FL](https://www.cardinalsolutions.com/events/2018/11/11-5-18-tpainfracstructureascode)
 
 ## Surveys
 
@@ -28,3 +25,10 @@ The Challenge description can be found here: [Challenges](challenges.md)
 - https://www.terraform.io/docs/providers/azurerm
 - http://aka.ms/tfhub Microsoft documentation
 - https://github.com/kamatama41/tfenv Terraform Version Switcher
+
+## Previous Locations
+
+- Wednesday May 23rd, 2018 [Chicago, IL](https://www.eventbrite.com/e/provision-and-manage-microsoft-azure-infrastructure-tickets-45562831656)
+- Thursday May 31st, 2018 [Atlanta, GA](https://www.eventbrite.com/e/provision-and-manage-microsoft-azure-infrastructure-tickets-44854601320)
+- Tuesday June 5th, 2018 [Columbus, OH](https://www.eventbrite.com/e/provision-and-manage-microsoft-azure-infrastructure-tickets-45781193783)
+- Monday June 11th, 2018 [New York City, NY](https://www.eventbrite.com/e/provision-and-manage-microsoft-azure-infrastructure-tickets-46152026955)
