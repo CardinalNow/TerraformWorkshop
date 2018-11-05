@@ -1,13 +1,6 @@
-provider "azurerm" {
-  version = "= 1.4"
-}
-
-terraform {
-  required_version = ">= 0.11.7"
-}
-
 variable "username" {
-  default = "myusername"
+  // default = "myusername"
+  default = "tstraub"
 }
 
 resource "azurerm_resource_group" "main" {

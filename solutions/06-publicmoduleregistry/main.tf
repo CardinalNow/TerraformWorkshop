@@ -1,8 +1,3 @@
-
-terraform {
-  required_version = ">= 0.11.7"
-}
-
 module "network" {
   source              = "Azure/network/azurerm"
   version             = "2.0.0"
@@ -16,7 +11,7 @@ module "network" {
 
 module "windowsservers" {
   source              = "Azure/compute/azurerm"
-  version             = "1.1.5"
+  version             = "1.1.7"
   resource_group_name = "myapp-compute-windows"
   location            = "eastus"
   admin_password      = "ComplxP@ssw0rd!"
@@ -27,7 +22,7 @@ module "windowsservers" {
 
 module "linuxservers" {
   source              = "Azure/compute/azurerm"
-  version             = "1.1.5"
+  version             = "1.1.7"
   resource_group_name = "myapp-compute-linux"
   location            = "eastus"
   vm_os_simple        = "UbuntuServer"

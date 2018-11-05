@@ -23,17 +23,7 @@ We will start with a few of the basic resources needed.
 
 From the Cloud Shell, change directory into a folder specific to this challenge. If you created the scaffolding in Challenge 00, then then you can use the command `cd ~/AzureWorkChallenges/challenge03/`.
 
-Create a `main.tf` file with the following to pin the version of Terraform and the AzureRM Provider:
-
-```hcl
-provider "azurerm" {
-  version = "= 1.4"
-}
-
-terraform {
-  required_version = "= 0.11.7"
-}
-```
+Create a `main.tf` file to hold our configuration.
 
 ### Create Variables
 

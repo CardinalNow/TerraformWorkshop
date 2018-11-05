@@ -87,7 +87,7 @@ Each of these resources you will need make these changes:
 - Update the Private IP outputs to display an array of IPs:
 
 ```hcl
-    value = "${azurerm_network_interface.module.*.private_ip_address}"
+    value = "${azurerm_network_interface.main.*.private_ip_address}"
 ```
 
 - Update the Public IP outputs to display an array of IPs:

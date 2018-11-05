@@ -1,19 +1,9 @@
-# Version pinning
-provider "azurerm" {
-  version = "= 1.4"
-}
-
-terraform {
-  required_version = ">= 0.11.7"
-}
-
-# Variables
 variable "vm_size" {}
 variable "username" {}
 variable "password" {}
 
 variable "name" {
-  default = "challenge04"
+  default = "challenge05"
 }
 
 variable "location" {

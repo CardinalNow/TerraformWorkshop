@@ -238,11 +238,17 @@ Search for "Storage Account" and click the first item and then click "Create" :
 
 In the Storage Account create blad, fill out the following:
 
-- Name = Must be a unique name, there will be a green checkmark that shows up in the text box if your name is available. Example "<YOURUSERNAME>storageaccount"
-- Replication = LRS
+- Subscription = Use the current subscription
 - Resource Group = Use Existing and select "myportal-rg"
+- Name = Must be a unique name, there will be a green checkmark that shows up in the text box if your name is available. Example "<YOURUSERNAME>storageaccount"
+- Location = East US
+- Performance = Standard
+- Account Kind = Storage V2
+- Replication = LRS
+- Access Tier = Hot
 
-![](../../img/2018-05-28-14-05-39.png)
+<!-- ![](../../img/2018-05-28-14-05-39.png) -->
+![](../../img/2018-11-02-12-59-21.png)
 
 Click "Create"
 
@@ -263,19 +269,20 @@ We have two resources we need to import into our Terraform Configuration, to do 
 To create the base configuration place the following code into the `main.tf` file.
 
 ```hcl
-resource "azurerm_resource_group" "main" {
+resource "azurerm_resource_group" "import" {
   name     = "myportal-rg"
-  location = "centralus"
+  location = "eastus"
 }
 
-resource "azurerm_storage_account" "main" {
-  name                     = "myusernamestorageaccount"
-  resource_group_name      = "${azurerm_resource_group.main.name}"
-  location                 = "centralus"
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+resource "azurerm_storage_account" "import" {
+  name                      = "myusernamestorageaccount"
+  resource_group_name       = "${azurerm_resource_group.import.name}"
+  location                  = "eastus"
+  account_kind              = "StorageV2"
+  account_tier              = "Standard"
+  account_replication_type  = "LRS"
+  enable_https_traffic_only = true
 }
-
 ```
 
 `terraform plan`
@@ -340,7 +347,7 @@ The Azure Resource ID can be retrieved using the Azure CLI by running `az group 
 Now run the import command:
 
 ```sh
-$ terraform import azurerm_resource_group.main /subscriptionsxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myportal-rg
+$ terraform import azurerm_resource_group.main /subscriptions/xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myportal-rg
 
 Import successful!
 
@@ -423,3 +430,4 @@ Run a `terraform destroy` and follow the prompts to remove the infrastructure.
 ## Resources
 
 - [Terraform Count](https://www.terraform.io/docs/configuration/interpolation.html#count-information)
+- [Terraform Import](https://www.terraform.io/docs/commands/import.html)
