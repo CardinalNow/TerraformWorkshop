@@ -78,6 +78,16 @@ Each of these resources you will need make these changes:
     network_interface_ids = ["${element(azurerm_network_interface.main.*.id, count.index)}"]
 ```
 
+- Update the Public IP block:
+
+```hcl
+resource "azurerm_public_ip" "main" {
+    name                         = "${var.name}-pubip${count.index}"
+    ...
+    count                        = "${var.vmcount}"
+}
+```
+
 - Update the Public IP ID reference for the Network Interface:
 
 ```hcl
@@ -350,7 +360,7 @@ Run `terraform destroy` to remove everything we created.
 ## Advanced areas to explore
 
 1. Add an Azure Load Balancer.
-1. Add tags to the Virtual Machine and then use the `-target` option to target only a single resource.
+2. Add tags to the Virtual Machine and then use the `-target` option to target only a single resource.
 
 ## Resources
 
