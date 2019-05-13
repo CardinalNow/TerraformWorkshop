@@ -148,6 +148,8 @@ View all Resource Groups and you should see the recently created Resource Group.
 
 Now add a new Resource Group resource that scales with a `count` parameter.
 
+> Note: This is ADDING another `resource` block in addition to the one you have already created.
+
 ```hcl
 resource "azurerm_resource_group" "count" {
   name     = "challenge01-rg-${count.index}"
@@ -156,60 +158,7 @@ resource "azurerm_resource_group" "count" {
 }
 ```
 
-Run another `terraform plan` and `terraform apply`.
-
-### Cleanup Resources
-
-When you are done, destroy the infrastructure, we no longer need it.
-
-```sh
-$ terraform destroy
-azurerm_resource_group.main: Refreshing state... (ID: /subscriptions/.../resourceGroups/challenge01-rg)
-azurerm_resource_group.count[0]: Refreshing state... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0)
-azurerm_resource_group.count[1]: Refreshing state... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1)
-
-An execution plan has been generated and is shown below.
-Resource actions are indicated with the following symbols:
-  - destroy
-
-Terraform will perform the following actions:
-
-  - azurerm_resource_group.count[0]
-
-  - azurerm_resource_group.count[1]
-
-  - azurerm_resource_group.main
-
-
-Plan: 0 to add, 0 to change, 3 to destroy.
-
-Do you really want to destroy?
-  Terraform will destroy all your managed infrastructure, as shown above.
-  There is no undo. Only 'yes' will be accepted to confirm.
-
-  Enter a value: yes
-
-azurerm_resource_group.main: Destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg)
-azurerm_resource_group.count[1]: Destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1)
-azurerm_resource_group.count[0]: Destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0)
-azurerm_resource_group.count.0: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0, 10s elapsed)
-azurerm_resource_group.main: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg, 10s elapsed)
-azurerm_resource_group.count.1: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1, 10s elapsed)
-azurerm_resource_group.count.1: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1, 20s elapsed)
-azurerm_resource_group.count.0: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0, 20s elapsed)
-azurerm_resource_group.main: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg, 20s elapsed)
-azurerm_resource_group.count.1: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1, 30s elapsed)
-azurerm_resource_group.count.0: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0, 30s elapsed)
-azurerm_resource_group.main: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg, 30s elapsed)
-azurerm_resource_group.count.0: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0, 40s elapsed)
-azurerm_resource_group.count.1: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1, 40s elapsed)
-azurerm_resource_group.main: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg, 40s elapsed)
-azurerm_resource_group.main: Destruction complete after 47s
-azurerm_resource_group.count[0]: Destruction complete after 47s
-azurerm_resource_group.count[1]: Destruction complete after 47s
-
-Destroy complete! Resources: 3 destroyed.
-```
+Run another `terraform plan` then `terraform apply` and validate the resource groups have been created.
 
 ---
 
@@ -221,9 +170,10 @@ Navigate to the Azure Portal and click on the "Resource groups" item on the left
 
 ![](../../img/2018-05-28-13-58-49.png)
 
-In the Resource Group create blade give the resource group the name "myportal-rg" and click "Create":
+In the Resource Group create blade give the resource group the name "myportal-rg" and click "Review + Create" -> "Create":
 
-![](../../img/2018-05-28-14-01-30.png)
+![](../../img/2019-05-08-09-24-12.png)
+<!-- ![](../../img/2018-05-28-14-01-30.png) -->
 
 Once the Resource Group is created, navigate to it.
 
@@ -233,10 +183,11 @@ Find the "+ Add" button and click it:
 
 Search for "Storage Account" and click the first item and then click "Create" :
 
-![](../../img/2018-05-28-14-04-39.png)
+![](../../img/2019-05-08-09-27-19.png)
+<!-- ![](../../img/2018-05-28-14-04-39.png) -->
 
 
-In the Storage Account create blad, fill out the following:
+In the Storage Account create blade, fill out the following:
 
 - Subscription = Use the current subscription
 - Resource Group = Use Existing and select "myportal-rg"
@@ -247,10 +198,10 @@ In the Storage Account create blad, fill out the following:
 - Replication = LRS
 - Access Tier = Hot
 
-<!-- ![](../../img/2018-05-28-14-05-39.png) -->
 ![](../../img/2018-11-02-12-59-21.png)
+<!-- ![](../../img/2018-05-28-14-05-39.png) -->
 
-Click "Create"
+Click "Review + Create" -> "Create".
 
 At this point we have a Resource Group and a Storage Account and are ready to import this into Terraform.
 
@@ -259,7 +210,7 @@ At this point we have a Resource Group and a Storage Account and are ready to im
 ### Create Terraform Configuration
 
 Your Azure Cloud Shell should still be in the folder for this challenge with a single `main.tf` file.
-Delete the contents of that file so we can start from scratch.
+We will now add `resource` blocks to represent the infrastructure we are about to import.
 
 We have two resources we need to import into our Terraform Configuration, to do this we need to do two things:
 
@@ -374,21 +325,33 @@ your Terraform state and will henceforth be managed by Terraform.
 
 ### Verify Plan
 
-Run a `terraform plan`, you should see "No changes. Infrastructure is up-to-date.".
+Run a `terraform plan`, you should see no changes:
+
+```sh
+$ terraform plan
+
+...
+
+No changes. Infrastructure is up-to-date.
+
+This means that Terraform did not detect any differences between your
+configuration and real physical resources that exist. As a result, no
+actions need to be performed.
+```
 
 ### Make a Change
 
 Add the following tag configuration to both the Resource Group and the Storage Account:
 
 ```hcl
-resource "azurerm_resource_group" "main" {
+resource "azurerm_resource_group" "import" {
   ...
   tags {
     terraform = "true"
   }
 }
 
-resource "azurerm_storage_account" "main" {
+resource "azurerm_storage_account" "import" {
   ...
   tags {
     terraform = "true"
@@ -399,11 +362,11 @@ resource "azurerm_storage_account" "main" {
 Run a plan, we should see two changes.
 
 ```sh
-  ~ azurerm_resource_group.main
+  ~ azurerm_resource_group.import
       tags.%:         "0" => "1"
       tags.terraform: "" => "true"
 
-  ~ azurerm_storage_account.main
+  ~ azurerm_storage_account.import
       tags.%:         "0" => "1"
       tags.terraform: "" => "true"
 
@@ -411,11 +374,76 @@ Run a plan, we should see two changes.
 Plan: 0 to add, 2 to change, 0 to destroy.
 ```
 
-Apply those changes.
+Run `terraform apply`.
 
 SUCCESS! You have now brought existing infrastructure into Terraform.
 
 ### Cleanup
+
+When you are done, destroy the infrastructure, you no longer need it.
+
+```sh
+$ terraform destroy
+azurerm_resource_group.main: Refreshing state... (ID: /subscriptions/.../resourceGroups/challenge01-rg)
+azurerm_resource_group.import: Refreshing state... (ID: /subscriptions/.../resourceGroups/myportal-rg)
+azurerm_resource_group.count[0]: Refreshing state... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0)
+azurerm_resource_group.count[1]: Refreshing state... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1)
+azurerm_storage_account.import: Refreshing state... (ID: /subscriptions/.../storageAccounts/myusernamestorageaccount)
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  - azurerm_resource_group.count[0]
+
+  - azurerm_resource_group.count[1]
+
+  - azurerm_resource_group.import
+
+  - azurerm_resource_group.main
+
+  - azurerm_storage_account.import
+
+
+Plan: 0 to add, 0 to change, 5 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.clear
+
+  Enter a value: yes
+
+azurerm_resource_group.count[1]: Destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1)
+azurerm_resource_group.main: Destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg)
+azurerm_storage_account.import: Destroying... (ID: /subscriptions/.../storageAccounts/myusernamestorageaccount)
+azurerm_resource_group.count[0]: Destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0)
+azurerm_storage_account.import: Destruction complete after 1s
+azurerm_resource_group.import: Destroying... (ID: /subscriptions/.../resourceGroups/myportal-rg)
+azurerm_resource_group.main: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg, 10s elapsed)
+azurerm_resource_group.count.1: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1, 10s elapsed)
+azurerm_resource_group.count.0: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0, 10s elapsed)
+azurerm_resource_group.import: Still destroying... (ID: /subscriptions/.../resourceGroups/myportal-rg, 10s elapsed)
+azurerm_resource_group.main: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg, 20s elapsed)
+azurerm_resource_group.count.1: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1, 20s elapsed)
+azurerm_resource_group.count.0: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0, 20s elapsed)
+azurerm_resource_group.import: Still destroying... (ID: /subscriptions/.../resourceGroups/myportal-rg, 20s elapsed)
+azurerm_resource_group.main: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg, 30s elapsed)
+azurerm_resource_group.count.1: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1, 30s elapsed)
+azurerm_resource_group.count.0: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0, 30s elapsed)
+azurerm_resource_group.import: Still destroying... (ID: /subscriptions/.../resourceGroups/myportal-rg, 30s elapsed)
+azurerm_resource_group.main: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg, 40s elapsed)
+azurerm_resource_group.count.1: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1, 40s elapsed)
+azurerm_resource_group.count.0: Still destroying... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0, 40s elapsed)
+azurerm_resource_group.import: Still destroying... (ID: /subscriptions/.../resourceGroups/myportal-rg, 40s elapsed)
+azurerm_resource_group.count[0]: Destruction complete after 45s
+azurerm_resource_group.count[1]: Destruction complete after 45s
+azurerm_resource_group.main: Destruction complete after 45s
+azurerm_resource_group.import: Destruction complete after 46s
+
+Destroy complete! Resources: 5 destroyed.
+```
 
 Because the infrastructure is now managed by Terraform, we can destroy just like before.
 
@@ -424,8 +452,8 @@ Run a `terraform destroy` and follow the prompts to remove the infrastructure.
 ## Advanced areas to explore
 
 1. Play around with adjusting the `count` and `name` parameters, then running `plan` and `apply`.
-1. Run the `plan` command with the `-out` option and apply that output.
-1. Add tags to each resource.
+2. Run the `plan` command with the `-out` option and apply that output.
+3. Add tags to each resource.
 
 ## Resources
 

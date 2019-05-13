@@ -65,61 +65,76 @@ In the Cloud Shell type the following commands and verify that the utilities are
 
 ```sh
 $ az -v
-azure-cli (2.0.33)
+azure-cli (2.0.64)
 
-acr (2.0.25)
-acs (2.0.33)
-advisor (0.5.1)
-ams (0.1.1)
-appservice (0.1.33)
-backup (1.1.1)
-batch (3.2.2)
-batchai (0.2.3)
-billing (0.1.8)
-cdn (0.0.14)
-cloud (2.0.13)
-cognitiveservices (0.1.13)
-command-modules-nspkg (2.0.1)
-configure (2.0.15)
-consumption (0.3.1)
-container (0.1.24)
-core (2.0.33)
-cosmosdb (0.1.21)
-dla (0.1.0)
-dls (0.0.21)
-dms (0.0.1)
-eventgrid (0.1.12)
-eventhubs (0.1.3)
-extension (0.0.14)
-feedback (2.1.1)
-find (0.2.9)
-interactive (0.3.21)
-iot (0.1.20)
-keyvault (2.0.22)
-lab (0.0.22)
-maps (0.1.0)
-monitor (0.1.7)
-network (2.1.2)
-nspkg (3.0.2)
-profile (2.0.25)
-rdbms (0.2.3)
-redis (0.2.13)
-reservations (0.1.2)
-resource (2.0.29)
-role (2.0.24)
-servicebus (0.1.2)
-servicefabric (0.0.12)
-sql (2.0.26)
-storage (2.0.33)
-vm (2.0.32)
+acr                                2.2.6
+acs                                2.4.1
+advisor                            2.0.0
+ams                                0.4.5
+appservice                        0.2.19
+backup                             1.2.4
+batch                              4.0.1
+batchai                            0.4.8
+billing                            0.2.1
+botservice                         0.2.0
+cdn                                0.2.3
+cloud                              2.1.1
+cognitiveservices                  0.2.5
+command-modules-nspkg               2.0.2
+configure                         2.0.23
+consumption                        0.4.2
+container                         0.3.16
+core                              2.0.64
+cosmosdb                          0.2.10
+deploymentmanager                  0.1.0
+dla                                0.2.5
+dls                                0.1.9
+dms                                0.1.3
+eventgrid                          0.2.3
+eventhubs                          0.3.5
+extension                          0.2.5
+feedback                           2.2.1
+find                               0.3.2
+hdinsight                          0.3.3
+interactive                        0.4.3
+iot                                0.3.8
+iotcentral                         0.1.6
+keyvault                          2.2.15
+kusto                              0.2.2
+lab                                0.1.7
+maps                               0.3.4
+monitor                           0.2.13
+network                            2.4.0
+nspkg                              3.0.3
+policyinsights                     0.1.3
+privatedns                         1.0.0
+profile                            2.1.5
+rdbms                             0.3.10
+redis                              0.4.2
+relay                              0.1.4
+reservations                       0.4.2
+resource                          2.1.14
+role                               2.6.1
+search                             0.1.1
+security                           0.1.1
+servicebus                         0.3.5
+servicefabric                     0.1.18
+signalr                            1.0.0
+sql                                2.2.3
+sqlvm                              0.1.1
+storage                            2.4.1
+telemetry                          1.0.2
+vm                                2.2.20
 
 Python location '/opt/az/bin/python3'
-Extensions directory '/home/tstraub/.azure/cliextensions'
+Extensions directory '~/.azure/cliextensions'
 
-Python (Linux) 3.6.1 (default, May 18 2018, 04:21:17)
+Python (Linux) 3.6.5 (default, May  2 2019, 00:44:44)
 [GCC 5.4.0 20160609]
 
 Legal docs and information: aka.ms/AzureCliLegal
+
+Your CLI is up-to-date.
 ```
 </p>
 </details>
@@ -131,7 +146,7 @@ Legal docs and information: aka.ms/AzureCliLegal
 
 ```sh
 $ terraform -v
-Terraform v0.11.7
+Terraform v0.11.13
 ```
 
 </p>

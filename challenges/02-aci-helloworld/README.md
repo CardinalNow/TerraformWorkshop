@@ -22,8 +22,8 @@ From the Cloud Shell, change directory into a folder specific to this challenge.
 Create a new file called `main.tf` with the following contents:
 
 ```hcl
-variable "username" {
-  default = "myusername"
+resource "random_pet" "main" {
+  length = 2
 }
 
 resource "azurerm_resource_group" "main" {
@@ -32,7 +32,7 @@ resource "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_storage_account" "main" {
-  name                     = "azcntinststor${var.username}"
+  name                     = "azcntinststor${random_pet.main.id}"
   resource_group_name      = "${azurerm_resource_group.main.name}"
   location                 = "${azurerm_resource_group.main.location}"
   account_tier             = "Standard"
@@ -51,7 +51,7 @@ resource "azurerm_container_group" "main" {
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
   ip_address_type     = "public"
-  dns_name_label      = "aci-${var.username}"
+  dns_name_label      = "aci-${random_pet.main.id}"
   os_type             = "linux"
 
   container {
@@ -89,8 +89,6 @@ resource "azurerm_container_group" "main" {
 }
 ```
 
-> Be sure to update the `username` variable that is a unique name to you, and that it is less than 6 characters. This is used to build the storage account name and the public DNS name for the Container Instance and therefor must be unique.
-
 ### Terraform Init and Plan
 
 Running an `init` should look something like this:
@@ -118,7 +116,7 @@ Terraform will perform the following actions:
       ...
 
   + azurerm_storage_account.main
-      name:                                       "azcntinststormyusername"
+      name:                                       "<computed>"
       ...
 
   + azurerm_storage_share.main
@@ -169,7 +167,7 @@ resource "azurerm_container_group" "windows" {
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
   ip_address_type     = "public"
-  dns_name_label      = "aci-iis-${var.username}"
+  dns_name_label      = "aci-iis-${random_pet.main.id}"
   os_type             = "windows"
 
   container {
@@ -200,7 +198,7 @@ Run a `terraform destroy` when you are done exploring.
 ## Advanced areas to explore
 
 1. What do you think will happen if you try to combine the Azure Container Instances above (Linux and Windows) into one?
-1. Replicate the Terraform above using a single Azure CLI command. Which is easier?
+2. Replicate the Terraform above using a single Azure CLI command. Which is easier?
 
 ## Resources
 
