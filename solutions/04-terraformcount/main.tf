@@ -32,11 +32,11 @@ resource "azurerm_subnet" "main" {
 
 # VM Resources
 resource "azurerm_public_ip" "main" {
-  name                         = "${var.name}-pubip${count.index}"
-  location                     = "${azurerm_resource_group.main.location}"
-  resource_group_name          = "${azurerm_resource_group.main.name}"
-  public_ip_address_allocation = "static"
-  count                        = "${var.vmcount}"
+  name                = "${var.name}-pubip${count.index}"
+  location            = "${azurerm_resource_group.main.location}"
+  resource_group_name = "${azurerm_resource_group.main.name}"
+  allocation_method   = "Static"
+  count               = "${var.vmcount}"
 }
 
 resource "azurerm_network_interface" "main" {

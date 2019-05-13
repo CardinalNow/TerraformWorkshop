@@ -1,6 +1,6 @@
-variable "username" {
-  // default = "myusername"
-  default = "tstraub"
+resource "random_pet" "main" {
+  length    = 2
+  separator = ""
 }
 
 resource "azurerm_resource_group" "main" {
@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_storage_account" "main" {
-  name                     = "azcntinststor${var.username}"
+  name                     = "acidev${random_pet.main.id}"
   resource_group_name      = "${azurerm_resource_group.main.name}"
   location                 = "${azurerm_resource_group.main.location}"
   account_tier             = "Standard"
@@ -28,7 +28,7 @@ resource "azurerm_container_group" "main" {
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
   ip_address_type     = "public"
-  dns_name_label      = "aci-${var.username}"
+  dns_name_label      = "aci-${random_pet.main.id}"
   os_type             = "linux"
 
   container {
@@ -36,7 +36,11 @@ resource "azurerm_container_group" "main" {
     image  = "microsoft/aci-helloworld"
     cpu    = "0.5"
     memory = "1.5"
-    port   = "80"
+
+    ports {
+      port     = 80
+      protocol = "TCP"
+    }
 
     environment_variables {
       "NODE_ENV" = "testing"
@@ -70,7 +74,7 @@ resource "azurerm_container_group" "windows" {
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
   ip_address_type     = "public"
-  dns_name_label      = "aci-iis-${var.username}"
+  dns_name_label      = "aci-iis-${random_pet.main.id}"
   os_type             = "windows"
 
   container {
@@ -78,7 +82,11 @@ resource "azurerm_container_group" "windows" {
     image  = "microsoft/iis"
     cpu    = "0.5"
     memory = "1.5"
-    port   = "80"
+
+    ports {
+      port     = 80
+      protocol = "TCP"
+    }
   }
 
   tags {
