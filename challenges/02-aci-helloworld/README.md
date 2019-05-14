@@ -23,7 +23,7 @@ Create a new file called `main.tf` with the following contents:
 
 ```hcl
 resource "random_pet" "main" {
-  length = 2
+  length    = 2
   separator = ""
 }
 
@@ -33,7 +33,7 @@ resource "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_storage_account" "main" {
-  name                     = "azcntinststor${random_pet.main.id}"
+  name                     = "acidev${random_pet.main.id}"
   resource_group_name      = "${azurerm_resource_group.main.name}"
   location                 = "${azurerm_resource_group.main.location}"
   account_tier             = "Standard"
