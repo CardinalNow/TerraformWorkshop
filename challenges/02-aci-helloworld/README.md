@@ -24,6 +24,7 @@ Create a new file called `main.tf` with the following contents:
 ```hcl
 resource "random_pet" "main" {
   length = 2
+  separator = ""
 }
 
 resource "azurerm_resource_group" "main" {
